@@ -1,5 +1,6 @@
 FROM python:3.7-alpine
 ADD app.py /app.py
+ADD gunicorn_logging.conf /gunicorn_logging.conf
 
 RUN set -e; \
 	apk add --no-cache --virtual .build-deps \
