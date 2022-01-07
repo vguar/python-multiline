@@ -1,0 +1,20 @@
+name: Build 
+on: [push]
+
+env:
+  IMAGE: vguar/python-multiline
+  REGISTRY: quay.io
+
+jobs:
+  setup-build-publish-deploy:
+    name: Setup, Build, Publish, and Deploy
+    runs-on:  ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Push Image
+      run: |-
+        echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin $REGISTRY
+        docker build -t  $REGISTRY/$IMAGE:latest .
+        docker push $REGISTRY/$IMAGE:latest

@@ -1,0 +1,14 @@
+FROM python:3.7-alpine
+ADD app.py /app.py
+
+RUN set -e; \
+	apk add --no-cache --virtual .build-deps \
+		gcc \
+		libc-dev \
+		linux-headers \
+	; \
+	pip install flask gunicorn ; \
+	apk del .build-deps;
+
+WORKDIR /
+CMD ["gunicorn", "--workers", "5", "--bind", "0.0.0.0:8000", "app:app"]
