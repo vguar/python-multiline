@@ -4,6 +4,7 @@ app = Flask(__name__)
 
 @app.route('/test/')
 def test():
+    print("test")
     return 'rest'
 
 @app.route('/honeypot/')

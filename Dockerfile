@@ -11,4 +11,6 @@ RUN set -e; \
 	apk del .build-deps;
 
 WORKDIR /
-CMD ["gunicorn", "--workers", "5", "--bind", "0.0.0.0:8000", "app:app"]
+CMD ["gunicorn", "--log-config", "gunicorn_logging.conf", "--workers", "5", "--bind", "0.0.0.0:8000", "app:app"]
+
+
